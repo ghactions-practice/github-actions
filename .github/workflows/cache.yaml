@@ -2,7 +2,7 @@ name: cache
 on:
   push:
     paths:
-    - 'my-app/*'
+    - '.github/workflows/my-app/*'
 
 jobs:
   cache:
