@@ -3,7 +3,7 @@ on: push
 
 jobs:
   job1:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     steps:
     - name: exit 1
       run: exit 1
