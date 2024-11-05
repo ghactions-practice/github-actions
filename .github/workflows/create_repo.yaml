@@ -10,6 +10,7 @@ on:
         options:
         - example
         - service
+        - hello
       name: 
         description: 'set repo name'
         required: true
@@ -24,17 +25,22 @@ jobs:
       run: |
         echo "${{ secrets.PERSONAL_ACCESS_TOKEN }}" | gh auth login --with-token ## 깃헙 권한 사용
     - name: create-repo
+      id: create_repo  # Step에 ID 추가
       run: |
-        gh repo create ghactions-practice/${{ inputs.prefix }}-${{ inputs.name }} --public --add-readme ## 레포 생성 
+        gh repo create ghactions-practice/${{ github.event.inputs.prefix }}-${{ github.event.inputs.name }} --public --add-readme ## 레포 생성 
     - name: slack
       if: always()
       uses: slackapi/slack-github-action@v1.27.0
       with:
-        # This data can be any valid JSON from a previous step in the GitHub Action
         payload: |
           {
-            "title": "create repo result ${{ steps.create-repo.outcome }}",
-            "value": "${{ inputs.prefix }}-${{ inputs.name }}"
+            "text": "Repository creation result: ${{ steps.create_repo.outcome }}",
+            "attachments": [
+              {
+                "title": "Repo Name",
+                "text": "${{ github.event.inputs.prefix }}-${{ github.event.inputs.name }}"
+              }
+            ]
           }
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
