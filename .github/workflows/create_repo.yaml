@@ -30,11 +30,10 @@ jobs:
         gh repo create ghactions-practice/${{ inputs.prefix }}-${{ inputs.name }} --public --add-readme ## 레포 생성 
     - name: slack
       if: always()
-      uses: slackapi/slack-github-action@v1.27.0
+      uses: slackapi/slack-github-action@v1.24.0
       with:
         payload: |
           {
-            "text": "Repository creation status",
               "attachments": [
                 {
                   "pretext": "create repo result",
