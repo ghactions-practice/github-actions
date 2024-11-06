@@ -34,18 +34,7 @@ jobs:
       with:
         payload: |
           {
-              "text": "Repository Creation Notification",
-              "attachments": [
-                {
-                  "pretext": "Create repo result",
-                  "fields": [
-                    {
-                      "title": "Result",
-                      "value": "Repository: ${{ inputs.prefix }}-${{ inputs.name }} created successfully"
-                    }
-                  ]
-                }  
-              ]
+              "text": "Repository: ${{ inputs.prefix }}-${{ inputs.name }} create ${{ steps.create-repo.outcome }}"
           }
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
