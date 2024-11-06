@@ -34,7 +34,7 @@ jobs:
       with:
         payload: |
           {
-              "text": "Repository: ${{ inputs.prefix }}-${{ inputs.name }} create ${{ steps.create-repo.outcome }}"
+              "text": "Repository: ${{ inputs.prefix }}-${{ inputs.name }} ${{ steps.create-repo.outcome }}"
           }
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
