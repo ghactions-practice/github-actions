@@ -35,12 +35,12 @@ jobs:
         payload: |
           {
             "text": "Repository creation result: ${{ steps.create_repo.outcome }}",
-            "attachments": [
-              {
-                "title": "Repo Name",
-                "text": "${{ inputs.prefix }}-${{ inputs.name }}"
-              }
-            ]
+              "attachments": [
+                {
+                  "title": "Repo Name",
+                  "text": "${{ github.event.inputs.prefix }}-${{ github.event.inputs.name }}"
+                }
+              ]
           }
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
