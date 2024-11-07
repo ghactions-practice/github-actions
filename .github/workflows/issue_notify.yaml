@@ -38,14 +38,19 @@ jobs:
       with :
         payload: |
           {
-              "text": "issue alert message",
-              "fields": [
-                {
-                  "title": "Level : ${{ needs.get-keyword.outputs.level }}",
-                  "short": true,
-                  "value": "issue url : ${{ github.event.issue.html_url }}"
-                }
-              ]
+            "attachments": [
+              {
+                "pretext": "issue alert message",
+                "color": "28a745",
+                "fields": [
+                  {
+                    "title": "Level : ${{ needs.get-keyword.outputs.level }}",
+                    "short": true,
+                    "value": "issue url : ${{ github.event.issue.html_url }}"
+                  }
+                ]
+              }
+            ]
           }
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
